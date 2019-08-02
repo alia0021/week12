@@ -14,6 +14,9 @@ export default new Vuex.Store({
     AUTH_USER(state, userData) {
       state.idToken = userData.token;
       state.userId = userData.userId;
+    },
+    SET_ERROR(state, error) {
+      state.error = error;
     }
   },
   actions: {
@@ -34,6 +37,7 @@ export default new Vuex.Store({
         .catch(error => {
           if (error.response) {
             console.log(error.response.data.error.message);
+            commit("SET_ERROR", error.response.data.error.message);
           }
         });
     },
@@ -57,6 +61,7 @@ export default new Vuex.Store({
         .catch(error => {
           if (error.response) {
             console.log(error.response.data.error.message);
+            commit("SET_ERROR", error.response.data.error.message);
           }
         });
     }
